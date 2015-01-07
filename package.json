@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "devDependencies": {
     "broccoli": "^0.13.3",
+    "broccoli-bower": "^0.2.1",
     "broccoli-esnext": "^0.5.0",
+    "broccoli-merge-trees": "^0.2.1",
     "broccoli-static-compiler": "^0.2.1"
   }
 }
