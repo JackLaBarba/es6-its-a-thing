@@ -1,0 +1,7 @@
+{
+  "name": "demo-app",
+  "version": "1.0.0",
+  "devDependencies": {
+    "broccoli": "^0.13.3"
+  }
+}
