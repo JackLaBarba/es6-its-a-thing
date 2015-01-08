@@ -1,0 +1,15 @@
+html {
+  body {
+    table.fancy-table {
+      border-collapse: collapse;
+
+      thead {
+        background-color: #EEEEEE;
+      }
+
+      td, th {
+        padding: 4px;
+      }
+    }
+  }
+}
