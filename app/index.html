@@ -2,6 +2,7 @@
 <head>
   <link rel="stylesheet" href="/vendor/reveal/css/reveal.min.css">
   <link rel="stylesheet" href="/vendor/reveal/css/theme/simple.css" id="theme">
+  <link rel="stylesheet" href="/vendor/reveal/lib/css/zenburn.css">
   <link rel="stylesheet" href="/css/application.css">
 </head>
 <body>
@@ -19,7 +20,7 @@
     <section>
       <h3>What the hell is ECMAscript?</h3>
       <ul>
-        <li class="fragment fade-in">It's JavaScript! (JS is an implementation of ES)</li>
+        <li class="fragment fade-in">It's JavaScript! (rather, JS is an implementation of ES)</li>
         <li class="fragment fade-in">ECMA = European Computer Manufacturer's Association</li>
         <li class="fragment fade-in">"ECMAScript was always an unwanted trade name that sounds like a skin disease"
           --Brendan Eich (Netscape)
@@ -77,6 +78,55 @@
       </table>
     </section>
 
+    <section>
+      <h3>Browsers dont understand it yet so why should I care?</h3>
+      <ul>
+        <li class="fragment fade-in">Ember uses es6-style module syntax</li>
+        <li class="fragment fade-in">You can start writing es6 source right now using . . . </li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>es6->es5 transpilation</h3>
+      <ul>
+        <li class="fragment fade-in">That's scary!<span class="fragment fade-in"> No it's not, we already do it with CoffeeScript</span></li>
+        <li class="fragment fade-in">It's pretty easy with esnext</li>
+      </ul>
+    </section>
+    <section>
+      <h3>esnext</h3>
+      <ul>
+        <li class="fragment fade-in">node.js package maintained by Square. (<a href="https://github.com/esnext/esnext">github</a>)</li>
+        <li class="fragment fade-in">Combines a bunch of other projects that translate individual features</li>
+        <li class="fragment fade-in">Try it in the browser <a href="https://esnext.github.io/esnext/">here</a></li>
+        <li class="fragment fade-in">Can be used with build tools like broccoli, gulp, or grunt</li>
+      </ul>
+    </section>
+    <section>
+      <h3>Setting up esnext with ember-cli</h3>
+        <pre class="fragment fade-in"><code class="bash">npm install --save-dev ember-cli-esnext</code></pre>
+        <p class="fragment fade-in">That's it!</p>
+    </section>
+    <section>
+      <h3>Using esnext with broccoli</h3>
+      <pre class="fragment fade-in"><code class="javascript">
+        //Brocfile.js
+        var pickFiles = require('broccoli-static-compiler');
+        var compileEsnext = require('broccoli-esnext');
+
+        var appDir = 'app/';
+        app = pickFiles(appDir, {
+          srcDir: '/',
+          destDir: '/'
+        });
+        app = compileEsnext(app);
+        module.exports = app;
+      </code></pre>
+      <p class="fragment fade-in">Need an example app? Use this presentation! (<a href="https://github.com/dweebit/es6-its-a-thing">github</a>)</p>
+    </section>
+
+
+
     <!--A listing of new ES6 features-->
     <section>
       <h3>The cool new things</h3>
@@ -88,8 +138,8 @@
     </section>
   </div>
 </div>
-
-<script src="/vendor/reveal/js/reveal.min.js"></script>
+<script src="/vendor/reveal/lib/js/head.min.js"></script>
+<script src="/vendor/reveal/js/reveal.js"></script>
 <script type="text/javascript" src="/js/application.js"></script>
 </body>
 </html>

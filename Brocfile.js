@@ -19,6 +19,6 @@ reveal = pickFiles('bower_components/reveal.js/', {
   destDir: '/vendor/reveal/'
 });
 
-var sourceTrees = [app, appCss, reveal];
+sourceTrees = [app, appCss, reveal];
 module.exports = mergeTrees(sourceTrees);
 
