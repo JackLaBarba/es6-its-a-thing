@@ -138,6 +138,70 @@
       <p>(for a complete list of what esnext supports see the <a href="https://github.com/esnext/esnext#available">readme</a>)</p>
     </section>
 
+    <section>
+      <section>
+        <h3>Arrow functions =></h3>
+
+        <li>Make anonymous functions without typing the word function!
+          <pre><code class="javascript">
+            //Expression bodies
+            var odds = evens.map(v => v + 1);
+            var nums = evens.map((v, i) => v + i);
+
+            // Statement bodies
+            nums.forEach(v => {
+              if (v % 5 === 0)
+                fives.push(v);
+            });
+          </code></pre>
+        </li>
+      </section>
+      <section>
+        <ul>
+          <li>=>'s block shares the same lexical <em>this</em> as its surrounding scope so this,
+          <pre><code class="javascript">
+            var bob = {
+              _name: "Bob",
+              _friends: [],
+              printFriends() {
+                var that = this;
+                this._friends.forEach(f =>
+                  console.log(that._name + " knows " + f));
+              }
+            }
+          </code></pre>
+          </li>
+          <li>can be this!
+          <pre><code class="javascript">
+            var bob = {
+              _name: "Bob",
+              _friends: [],
+              printFriends() {
+                this._friends.forEach(f =>
+                  console.log(this._name + " knows " + f));
+              }
+            }
+          </code></pre>
+          </li>
+        </ul>
+      </section>
+      <section>
+        <ul>
+          <li>Be careful though, -> means nothing in es6</li>
+        </ul>
+      </section>
+    </section>
+
+    <!--template-->
+    <section>
+      <ul>
+        <li>
+          <pre><code class="javascript">
+          </code></pre>
+        </li>
+      </ul>
+    </section>
+
   </div>
 </div>
 <script src="/vendor/reveal/lib/js/head.min.js"></script>
