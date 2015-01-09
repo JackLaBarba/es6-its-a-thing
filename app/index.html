@@ -119,7 +119,7 @@
     srcDir: '/',
     destDir: '/'
   });
-  app = compileEsnext(app);
+  app = compileEsnext(app, { includeRuntime: true } );
   module.exports = app;
       </code></pre>
       <p class="fragment fade-in">Need an example app? Use this presentation! (<a href="https://github.com/dweebit/es6-its-a-thing">github</a>)</p>
@@ -142,7 +142,7 @@
       <section>
         <h3>Arrow functions =></h3>
 
-        <li>Make anonymous functions without typing the word function!
+        <p>Make anonymous functions without typing the word function!</p>
           <pre><code class="javascript">
   //Expression bodies
   var odds = evens.map(v => v + 1);
@@ -154,11 +154,10 @@
       fives.push(v);
   });
           </code></pre>
-        </li>
+        </p>
       </section>
       <section>
-        <ul>
-          <li>=>'s block shares the same lexical <em>this</em> as its surrounding scope so this,
+          <p>=>'s block shares the same lexical <em>this</em> as its surrounding scope so this,</p>
           <pre><code class="javascript">
   var bob = {
     _name: "Bob",
@@ -170,8 +169,7 @@
     }
   }
           </code></pre>
-          </li>
-          <li>can be this!
+          <p>can be this!</p>
           <pre><code class="javascript">
   var bob = {
     _name: "Bob",
@@ -182,8 +180,6 @@
     }
   }
           </code></pre>
-          </li>
-        </ul>
       </section>
       <section>
         <ul>
@@ -194,8 +190,7 @@
 
     <section>
       <h3>class syntax</h3>
-      <ul>
-        <li>Provides sugar for defining classical OO on top of JavaScript's prototype-based OO:
+        <p>Provides sugar for defining classical OO on top of JavaScript's prototype-based OO:</p>
           <pre><code class="javascript">
   class SkinnedMesh extends THREE.Mesh {
     constructor(geometry, materials) {
@@ -215,54 +210,45 @@
     }
   }
           </code></pre>
-        </li>
-      </ul>
     </section>
 
     <section>
       <section>
-        <ul>
-          <h3>Much cooler object literals</h3>
-          <li>__proto__ key:
+        <h3>Much cooler object literals</h3>
+        <p>the __proto__ key:</p>
           <pre><code class="javascript">
   var obj = {
     __proto__: protoObj
   };
           </code></pre>
-          </li>
-          <li>instead of:
+          <p>instead of:</p>
           <pre><code class="javascript">
   var obj = {};
   obj.prototype = protoObj;
           </code></pre>
-          </li>
-        </ul>
       </section>
       <section>
-        <ul>
-          <h3>Much cooler object literals</h3>
-          <li><em>key: key</em> shorthand
+        <h3>Much cooler object literals</h3>
+          <p><em>key: key</em> shorthand</p>
           <pre><code class="javascript">
   var foo = 'foo';
   var obj = {
     foo
   };
           </code></pre>
-          </li>
-          <li>instead of:
+          </p>
+          <p>instead of:</p>
           <pre><code class="javascript">
   var foo = 'foo';
   var obj = {
     foo: foo
   };
           </code></pre>
-          </li>
-        </ul>
+          </p>
       </section>
       <section>
-        <ul>
-          <h3>Much cooler object literals</h3>
-          <li>methods
+        <h3>Much cooler object literals</h3>
+          <p>methods</p>
           <pre><code class="javascript">
   var obj = {
     setName(name) {
@@ -270,8 +256,7 @@
     }
   };
           </code></pre>
-          </li>
-          <li>instead of:
+          <p>instead of:</p>
           <pre><code class="javascript">
   var obj = {
     setName: function(name) {
@@ -279,13 +264,10 @@
     }
   };
           </code></pre>
-          </li>
-        </ul>
       </section>
       <section>
-        <ul>
-          <h3>Much cooler object literals</h3>
-          <li>Computed properties
+        <h3>Much cooler object literals</h3>
+          <p>Computed properties</p>
           <pre><code class="javascript">
   function rand() {
     return Math.floor(Math.random() * 100) }
@@ -297,23 +279,146 @@
 
   console.log(obj.crazy_key_42) //"a bad idea"
           </code></pre>
-          </li>
-        </ul>
       </section>
     </section>
 
-
-    <!--template-->
     <section>
-      <ul>
-        <h3>Computed property keys</h3>
-        <li>
+        <h3>Default params</h3>
           <pre><code class="javascript">
+  function sayHi(name='... you') {
+    console.log("Hi, " + name + '.');
+  }
+
+  sayHi() // "Hi, ... you."
           </code></pre>
-        </li>
+    </section>
+
+    <section>
+      <h3>Rest</h3>
+          <pre><code class="javascript">
+  function referTo(firstName, ...rest) {
+    // rest is an array
+    console.log(firstName + " and " + rest.length + " others ");
+  }
+
+  referTo('Larry', 'Curly', 'Moe'); //"Larry and 2 others"
+          </code></pre>
+    </section>
+
+    <section>
+      <h3>Spread</h3>
+          <pre><code class="javascript">
+  function magnitude(x, y, z) {
+    return Math.sqrt(x*x + y*y + z*z);
+  }
+
+  point = [1, 0, 0];
+  magnitude(...point); // 1
+          </code></pre>
+    </section>
+
+    <section>
+      <h3>Destructuring</h3>
+          <pre><code class="javascript">
+  // list matching
+  var [a, , b] = [1,2,3];
+
+  // object matching
+  var { op: a, lhs: { op: b }, rhs: c } = getASTNode()
+
+  // object matching shorthand
+  // binds `op`, `lhs` and `rhs` in scope
+  var {op, lhs, rhs} = getASTNode()
+
+  // Can be used in parameter position
+  function g({name: x}) {
+    console.log(x);
+  }
+  g({name: 5})
+
+  // Fail-soft destructuring
+  var [a] = [];
+  a === undefined;
+
+  // Fail-soft destructuring with defaults
+  var [a = 1] = [];
+  a === 1;
+          </code></pre>
+    </section>
+
+    <section>
+      <h3>Generator functions</h3>
+      <p></p>
+        <pre><code class="javascript">
+  function* plusOneFactory() {
+    var i = 0;
+    while (true) {
+      yield i;
+      i++;
+    }
+  }
+
+  var plusOner = plusOneFactory();
+  plusOner.next().value // 0
+  plusOner.next().value // 1
+  plusOner.next().value // 2
+
+        </code></pre>
+    </section>
+
+    <section>
+      <h3>for ... of</h3>
+      <p>Doesn't required fully realizing an array like <em>for ... in</em></p>
+        <pre><code class="javascript">
+  var stuff = ['a', 'b', 'c']
+  for (var num of myList) {
+    console.log(num) //"a", "b", "c"
+  }
+
+  for (var num of plusOner) {
+    if (num > 10) {
+      break;
+    }
+    console.log('plusOner: ', num); //"0", "1", "2", . . . "10
+  }
+        </code></pre>
+    </section>
+
+    <section>
+      <h3>Template strings</h3>
+      <p></p>
+        <pre><code class="javascript">
+  // Basic literal string creation
+  `In JavaScript '\n' is a line-feed`
+  //"In JavaScript '
+  //' is a line-feed."
+
+
+  // Multiline strings
+  `In JavaScript this is
+   not legal.`
+  //"In JavaScript this is
+  //not legal"
+
+  // Construct a DOM query
+  var name = "Bob", time = "today";
+  `Hello ${name}, how are you ${time}?`
+  //"Hello Bob, how are you today?"
+        </code></pre>
+    </section>
+
+    <section>
+      <h3>That's about it for esnext for now</h3>
+      <ul>
+        <li>But there's tons more to es6</li>
+        <li class="fragment fade-in">check out <a href="https://github.com/lukehoban/es6features">lukehoban/es6features</a> for a full list of features with examples</li>
+        <li class="fragment fade-in">and stay tuned for additions to esnext!</li>
       </ul>
     </section>
 
+    <section>
+      <h1>THE END</h1>
+    </section>
   </div>
 </div>
 <script src="/vendor/reveal/lib/js/head.min.js"></script>

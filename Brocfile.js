@@ -11,7 +11,7 @@ app = pickFiles(appDir, {
   srcDir: '/',
   destDir: '/'
 });
-app = compileEsnext(app);
+app = compileEsnext(app, { includeRuntime: true });
 appCss = compileSass([app], '/css/application.scss', '/css/application.css');
 
 reveal = pickFiles('bower_components/reveal.js/', {
