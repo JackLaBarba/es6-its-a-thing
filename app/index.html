@@ -110,17 +110,17 @@
     <section>
       <h3>Using esnext with broccoli</h3>
       <pre class="fragment fade-in"><code class="javascript">
-        //Brocfile.js
-        var pickFiles = require('broccoli-static-compiler');
-        var compileEsnext = require('broccoli-esnext');
+  //Brocfile.js
+  var pickFiles = require('broccoli-static-compiler');
+  var compileEsnext = require('broccoli-esnext');
 
-        var appDir = 'app/';
-        app = pickFiles(appDir, {
-          srcDir: '/',
-          destDir: '/'
-        });
-        app = compileEsnext(app);
-        module.exports = app;
+  var appDir = 'app/';
+  app = pickFiles(appDir, {
+    srcDir: '/',
+    destDir: '/'
+  });
+  app = compileEsnext(app);
+  module.exports = app;
       </code></pre>
       <p class="fragment fade-in">Need an example app? Use this presentation! (<a href="https://github.com/dweebit/es6-its-a-thing">github</a>)</p>
     </section>
@@ -144,15 +144,15 @@
 
         <li>Make anonymous functions without typing the word function!
           <pre><code class="javascript">
-            //Expression bodies
-            var odds = evens.map(v => v + 1);
-            var nums = evens.map((v, i) => v + i);
+  //Expression bodies
+  var odds = evens.map(v => v + 1);
+  var nums = evens.map((v, i) => v + i);
 
-            // Statement bodies
-            nums.forEach(v => {
-              if (v % 5 === 0)
-                fives.push(v);
-            });
+  // Statement bodies
+  nums.forEach(v => {
+    if (v % 5 === 0)
+      fives.push(v);
+  });
           </code></pre>
         </li>
       </section>
@@ -160,27 +160,27 @@
         <ul>
           <li>=>'s block shares the same lexical <em>this</em> as its surrounding scope so this,
           <pre><code class="javascript">
-            var bob = {
-              _name: "Bob",
-              _friends: [],
-              printFriends() {
-                var that = this;
-                this._friends.forEach(f =>
-                  console.log(that._name + " knows " + f));
-              }
-            }
+  var bob = {
+    _name: "Bob",
+    _friends: [],
+    printFriends() {
+      var that = this;
+      this._friends.forEach(f =>
+        console.log(that._name + " knows " + f));
+    }
+  }
           </code></pre>
           </li>
           <li>can be this!
           <pre><code class="javascript">
-            var bob = {
-              _name: "Bob",
-              _friends: [],
-              printFriends() {
-                this._friends.forEach(f =>
-                  console.log(this._name + " knows " + f));
-              }
-            }
+  var bob = {
+    _name: "Bob",
+    _friends: [],
+    printFriends() {
+      this._friends.forEach(f =>
+        console.log(this._name + " knows " + f));
+    }
+  }
           </code></pre>
           </li>
         </ul>
@@ -192,9 +192,121 @@
       </section>
     </section>
 
+    <section>
+      <h3>class syntax</h3>
+      <ul>
+        <li>Provides sugar for defining classical OO on top of JavaScript's prototype-based OO:
+          <pre><code class="javascript">
+  class SkinnedMesh extends THREE.Mesh {
+    constructor(geometry, materials) {
+      super(geometry, materials);
+
+      this.idMatrix = SkinnedMesh.defaultMatrix();
+      this.bones = [];
+      this.boneMatrices = [];
+      //...
+    }
+    update(camera) {
+      //...
+      super.update();
+    }
+    static defaultMatrix() {
+      return new THREE.Matrix4();
+    }
+  }
+          </code></pre>
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <section>
+        <ul>
+          <h3>Much cooler object literals</h3>
+          <li>__proto__ key:
+          <pre><code class="javascript">
+  var obj = {
+    __proto__: protoObj
+  };
+          </code></pre>
+          </li>
+          <li>instead of:
+          <pre><code class="javascript">
+  var obj = {};
+  obj.prototype = protoObj;
+          </code></pre>
+          </li>
+        </ul>
+      </section>
+      <section>
+        <ul>
+          <h3>Much cooler object literals</h3>
+          <li><em>key: key</em> shorthand
+          <pre><code class="javascript">
+  var foo = 'foo';
+  var obj = {
+    foo
+  };
+          </code></pre>
+          </li>
+          <li>instead of:
+          <pre><code class="javascript">
+  var foo = 'foo';
+  var obj = {
+    foo: foo
+  };
+          </code></pre>
+          </li>
+        </ul>
+      </section>
+      <section>
+        <ul>
+          <h3>Much cooler object literals</h3>
+          <li>methods
+          <pre><code class="javascript">
+  var obj = {
+    setName(name) {
+      this.name = name;
+    }
+  };
+          </code></pre>
+          </li>
+          <li>instead of:
+          <pre><code class="javascript">
+  var obj = {
+    setName: function(name) {
+      this.name = name;
+    }
+  };
+          </code></pre>
+          </li>
+        </ul>
+      </section>
+      <section>
+        <ul>
+          <h3>Much cooler object literals</h3>
+          <li>Computed properties
+          <pre><code class="javascript">
+  function rand() {
+    return Math.floor(Math.random() * 100) }
+  }
+
+  var obj = {
+    ['crazy_key_' + rand()]: "a bad idea"
+  };
+
+  console.log(obj.crazy_key_42) //"a bad idea"
+          </code></pre>
+          </li>
+        </ul>
+      </section>
+    </section>
+
+
     <!--template-->
     <section>
       <ul>
+        <h3>Computed property keys</h3>
         <li>
           <pre><code class="javascript">
           </code></pre>
