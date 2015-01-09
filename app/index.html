@@ -18,7 +18,7 @@
 
     <!--A background on ECMAscript-->
     <section>
-      <h3>What the hell is ECMAscript?</h3>
+      <h3>Huh? What's ECMAscript?</h3>
       <ul>
         <li class="fragment fade-in">It's JavaScript! (rather, JS is an implementation of ES)</li>
         <li class="fragment fade-in">ECMA = European Computer Manufacturer's Association</li>
@@ -363,6 +363,22 @@
   plusOner.next().value // 1
   plusOner.next().value // 2
 
+        </code></pre>
+    </section>
+
+    <section>
+      <h3><em>async</em> and <em>await</em></h3>
+      <p>No more callback hell for async code!</p>
+        <pre><code class="javascript">
+  async function complexCalculation() {
+    var firstNumber = await longCalculationOne();
+    var secondNumber = await longCalculationTwo(firstNumber);
+    return secondNumber;
+  }
+
+  complexCalculation().then( result => {
+     console.log("complicated result: ", result);
+  });
         </code></pre>
     </section>
 
